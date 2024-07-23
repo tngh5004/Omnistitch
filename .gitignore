@@ -1,0 +1,5 @@
+# specify a folder with slash in the end
+# ignore all files in any directory named temp
+__pycache__/
+demo/
+# train-log/
