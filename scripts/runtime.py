@@ -1,5 +1,6 @@
+import os
+import sys
 import torch
-import argparse
 import time
 import math
 
@@ -8,14 +9,17 @@ from core.pipeline import Pipeline
 """
 The runtime batch_size is 4. This is because the model's goal is to create an omnidirectional view.
 We used the RTX 4090 to measure the runtime of our model and other models. (CUDA Toolkit Version : 12.0)
-image size : 480 * 576 = average runtime: 0.124858 seconds
+In our main paper and rebuttal, the average runtime is written as 0.12s ± 0.02 because of the below result.
+image size : 480 * 576 (Smallest size of GV360 testset) = average runtime: 0.110116 seconds
+image size : 480 * 640 (Average size of GV360 testset) = average runtime: 0.127210 seconds
+image size : 480 * 768 (Largest size of GV360 testset) = average runtime: 0.131544 seconds
 """
 
 def test_runtime(model_name="omnistitch"):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.set_grad_enabled(False)
     
-    width, height = 480, 576
+    width, height = 480, 640
     skiplevel = 0
     img0 = torch.randn(4, 3, width, height)
     img0 = img0.to(device)
@@ -57,3 +61,5 @@ def test_runtime(model_name="omnistitch"):
 if __name__ == "__main__":
     model_name = "omnistitch"
     test_runtime(model_name)
+    
+# CUDA_VISIBLE_DEVICES=1 python3 -m scripts.runtime

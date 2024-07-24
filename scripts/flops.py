@@ -1,15 +1,18 @@
-import torch
+import os
+import sys
 import argparse
 import time
 import math
+
+import torch
+import torch.nn as nn
+from torchinfo import summary
+from ptflops import get_model_complexity_info
 
 from core.pipeline import Pipeline
 from core.model.omnistitch import Model as omnistitch
 from fvcore.nn import FlopCountAnalysis, flop_count_table
 
-import torch.nn as nn
-from torchinfo import summary
-from ptflops import get_model_complexity_info
 
 """
 if you want to check flops with omnistitch, we have to change forward function
@@ -50,3 +53,5 @@ def test_flops(model_name="omnistitch"):
 if __name__ == "__main__":
     model_name = "omnistitch"
     test_flops(model_name)
+    
+# CUDA_VISIBLE_DEVICES=1 python3 -m scripts.flops

@@ -13,6 +13,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 
 from core.loss import EPE, Ternary, VGGPerceptualLoss
 
+from core.model.vsla_model import Model as vsla_model
 from core.model.omnistitch import Model as omnistitch
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")

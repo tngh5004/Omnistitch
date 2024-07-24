@@ -1,20 +1,22 @@
 import os
+import sys
 import math
 import numpy as np
 import cv2
-from core.utils import flow_viz
 import argparse
 import warnings
 
 import torch
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
+import lpips
+import random
 
+from core.utils import flow_viz
 from core.pipeline import Pipeline
 from core.dataset import GV360
 from core.utils.pytorch_msssim import ssim_matlab
-import lpips
-import random
+
 
 warnings.filterwarnings("ignore")
 
@@ -139,4 +141,4 @@ if __name__ == "__main__":
         print(f"{args.data_root}")
         print(f"{args.model_name}")
 
-# CUDA_VISIBLE_DEVICES=0 python benchmark_performance.py
+# CUDA_VISIBLE_DEVICES=1 python3 -m scripts.benchmark_performance
