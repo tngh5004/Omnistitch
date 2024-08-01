@@ -245,4 +245,6 @@ class VSLA_SRMTEST(Dataset):
 
 
 if  __name__ == "__main__":
+    data_root = "/home/sooho/workspace/data/GV360_train"
+    print(GV360(data_root).__len__())
     pass

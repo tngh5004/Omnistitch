@@ -35,11 +35,11 @@ class Model(nn.Module):
         
         # scaling factor for VSLA
         batch_size, channels, height, width = F_0_1.size()
-        scaling_factor_01 = torch.linspace(0, 1, steps=100, device=torch.device("cuda")).view(1, 1, 1, 100).expand(batch_size, channels, height, width)
-        scaling_factor_10 = torch.linspace(1, 0, steps=100, device=torch.device("cuda")).view(1, 1, 1, 100).expand(batch_size, channels, height, width)
+        scaling_factor_01 = torch.linspace(0, 1, steps=480, device=torch.device("cuda")).view(1, 1, 1, 480)
+        scaling_factor_10 = torch.linspace(1, 0, steps=480, device=torch.device("cuda")).view(1, 1, 1, 480)
         
-        F_t_0 = F_0_1 * scaling_factor_01
-        F_t_1 = F_1_0 * scaling_factor_10
+        F_t_0 = F_0_1 * scaling_factor_01.expand(batch_size, channels, height, width)
+        F_t_1 = F_1_0 * scaling_factor_10.expand(batch_size, channels, height, width)
         
         # Get intermediate frames from the intermediate flows
         g_I0_F_t_0 = softsplat.backwarp_(img0, F_t_0)

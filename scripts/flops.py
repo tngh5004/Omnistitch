@@ -10,6 +10,7 @@ from torchinfo import summary
 from ptflops import get_model_complexity_info
 
 from core.pipeline import Pipeline
+from core.model.vsla_model import Model as vsla_model
 from core.model.omnistitch import Model as omnistitch
 from fvcore.nn import FlopCountAnalysis, flop_count_table
 
@@ -21,10 +22,10 @@ our network include the cupy calculation, so it was the best we could do :(
 
 Result by 4 * 3 * width * height
 batch size 4 means that Four instances are required to provide an omnidirectional view.
-Computational complexity: 312.99 GMac, Number of parameters: 4.99 M
+Computational complexity: 347.76 GMac, Number of parameters: 4.99 M
 """
 
-def test_flops(model_name="omnistitch"):
+def test_flops():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.set_grad_enabled(False)
     # GV360 dataset image size = 480 * 576 ~ 480 * 784
@@ -41,8 +42,6 @@ def test_flops(model_name="omnistitch"):
     if torch.cuda.is_available():
         torch.backends.cudnn.enabled = True
         torch.backends.cudnn.benchmark = True
-    if model_name not in ("omnistitch"):
-        raise ValueError("model_name must be one of ('omnistitch')")
     
     Model = omnistitch(PYR_LEVEL, skiplevel)
     input_shape = (3, height, width)
@@ -51,7 +50,6 @@ def test_flops(model_name="omnistitch"):
     print(f'Number of parameters: {params}')
 
 if __name__ == "__main__":
-    model_name = "omnistitch"
-    test_flops(model_name)
+    test_flops()
     
 # CUDA_VISIBLE_DEVICES=1 python3 -m scripts.flops
