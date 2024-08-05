@@ -79,6 +79,11 @@ The dataset was collected using [CARLA](https://github.com/carla-simulator/carla
 The code to generate the dataset is also available at this [link](https://github.com/tngh5004/Omnistitch/tree/main/scripts/GV360_generation_scripts).  
 Please note that we only collected our dataset in a Windows environment.
 
+### Real-world dataset and full applications
+The actual dataset is not publicly available as it is the property of Quramsoft.
+Also, the full application with the SRM module is under development, so it is not publicly available.
+However, the content of the paper can be reimplemented with the code and data provided.
+
 ## Acknowledgement
 We borrow some codes from [UPR-NET](https://github.com/srcn-ivl/UPR-Net.git), [softmax-splatting](https://github.com/sniklaus/softmax-splatting.git), and [CARLA](https://github.com/carla-simulator/carla.git). We thank the authors for their excellent work. When using our code, please also pay attention to the licenses of UPR-NET, softmax-splatting, and CARLA.
 
