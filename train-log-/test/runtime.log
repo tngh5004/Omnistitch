@@ -1,0 +1,2 @@
+2024-08-02 11:05:58.671 | INFO     | __main__:<module>:436 - start the training task: test
+2024-08-02 11:06:53.724 | INFO     | __main__:evaluate:260 - test => val step: 1; psnr: 17.7297; lpips_vgg : 0.3204

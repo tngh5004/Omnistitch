@@ -6,7 +6,6 @@ import math
 
 import torch
 import torch.nn as nn
-from torchinfo import summary
 from ptflops import get_model_complexity_info
 
 from core.pipeline import Pipeline
